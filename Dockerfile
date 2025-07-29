@@ -30,7 +30,7 @@ WORKDIR ${SEARXNG_SRC}
 COPY ./settings.yml ./settings.yml
 
 # Port exposé pour Koyeb
-EXPOSE ${PORT}
+EXPOSE ${8080}
 
 # ✅ Ligne unique pour démarrer SearXNG proprement
 CMD ["gunicorn", "-b", "0.0.0.0:8080", "searx.webapp:app"]
