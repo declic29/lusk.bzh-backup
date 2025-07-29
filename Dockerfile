@@ -44,3 +44,4 @@ EXPOSE ${PORT}
 
 # Commande de démarrage avec gunicorn
 CMD ["gunicorn", "-b", "0.0.0.0:8080", "searx.webapp:app"]
+CMD ["python3", "searx/webapp.py"]
