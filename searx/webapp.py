@@ -1408,8 +1408,18 @@ init()
 
 if __name__ == "__main__":
     run()
-@app.route("/health")
-def health_check():
-    return "OK", 200
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'Bienvenue sur Lusk.bzh !'
+
+@app.route('/health')
+def health():
+    return 'OK', 200
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)
+    # Écoute sur toutes les interfaces (obligatoire pour Koyeb)
+    app.run(host='0.0.0.0', port=8080)
