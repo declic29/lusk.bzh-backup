@@ -2798,3 +2798,9 @@ doi_resolvers:
   sci-hub.ru: 'https://sci-hub.ru/'
 
 default_doi_resolver: 'oadoi.org'
+  #     About: "https://searxng.org"
+
+branding:
+  name: "lusk.bzh"
+  slogan: "Ce que vous cherchez ne regarde que vous."
+  theme: simple
