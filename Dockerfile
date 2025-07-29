@@ -28,11 +28,19 @@ FROM python:3.11-slim
 
 ENV SEARXNG_SRC=/usr/local/searxng
 ENV INSTANCE_NAME="lusk.bzh"
+ENV FLASK_ENV=production
+ENV PORT=8080
 
 # Copie depuis l’image builder
 COPY --from=builder ${SEARXNG_SRC} ${SEARXNG_SRC}
 WORKDIR ${SEARXNG_SRC}
 
-# Copie de tes personnalisations (à adapter si tu ajoutes un dossier `custom`)
-# Exemple : templates personnalisés, settings.yml, favicon, etc.
-COPY ./
+# Copie de tes personnalisations (exemple : settings.yml personnalisé)
+# Assure-toi que settings.yml est à la racine de ton repo Docker pour qu’il soit copié
+COPY ./settings.yml ./settings.yml
+
+# Expose le port utilisé
+EXPOSE ${PORT}
+
+# Commande de démarrage avec gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "searx.webapp:app"]
