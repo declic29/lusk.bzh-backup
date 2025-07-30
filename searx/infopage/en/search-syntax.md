@@ -1,6 +1,6 @@
 # Search syntax
 
-SearXNG comes with a search syntax by which you can modify the categories,
+Lusk comes with a search syntax by which you can modify the categories,
 engines, languages, and more.  See the {{link('preferences', 'preferences')}} for
 the list of engines, categories, and languages.
 
@@ -35,7 +35,7 @@ To select a language filter use a `:` prefix.  To give an example:
 
 ## `!!<bang>` External bangs
 
-SearXNG supports the external bangs from [DuckDuckGo].  To directly jump to a
+Lusk supports the external bangs from [DuckDuckGo].  To directly jump to a
 external search page use the `!!` prefix.  To give an example:
 
 - Search Wikipedia with a custom language:
@@ -43,7 +43,7 @@ external search page use the `!!` prefix.  To give an example:
   - {{search('!!wfr Wau Holland')}}
 
 Please note that your search will be performed directly in the external search
-engine.  SearXNG cannot protect your privacy with this.
+engine.  Lusk cannot protect your privacy with this.
 
 [DuckDuckGo]: https://duckduckgo.com/bang
 
