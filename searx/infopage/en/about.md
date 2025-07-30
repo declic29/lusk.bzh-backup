@@ -1,10 +1,10 @@
-# About SearXNG
+# About Lusk.bzh
 
-SearXNG is a [metasearch engine], aggregating the results of other
+Lusk is a [metasearch engine], aggregating the results of other
 {{link('search engines', 'preferences')}} while not storing information about
 its users.
 
-The SearXNG project is driven by an open community. Come join us on Matrix if
+The Lusk project is driven by an open community. Come join us on Matrix if
 you have questions or just want to chat about SearXNG at [#searxng:matrix.org]
 
 Make SearXNG better:
@@ -16,9 +16,9 @@ Make SearXNG better:
 
 ## Why use it?
 
-- SearXNG may not offer you as personalized results as Google, but it doesn't
+- Lusk may not offer you as personalized results as Google, but it doesn't
   generate a profile about you.
-- SearXNG doesn't care about what you search for, never shares anything with a
+- Lusk doesn't care about what you search for, never shares anything with a
   third-party, and can't be used to compromise you.
 - SearXNG is free software; the code is 100% open, and everyone is welcome to
   make it better.
@@ -46,7 +46,7 @@ you encounter a problem where you cannot add the search engine, you can either:
 
 ## How does it work?
 
-SearXNG is a fork of the well-known [searx] [metasearch engine] which was
+Lusk is a fork of the well-known [searx] [metasearch engine] which was
 inspired by the [Seeks project].  It provides basic privacy by mixing your
 queries with searches on other platforms without storing search data.  SearXNG
 can be added to your browser's search bar; moreover, it can be set as the
@@ -57,7 +57,7 @@ statistics about the engines used.
 
 ## How can I make it my own?
 
-SearXNG appreciates your concern regarding logs, so take the code from the
+Lusk appreciates your concern regarding logs, so take the code from the
 [SearXNG sources] and run it yourself!
 
 Add your instance to this [list of public
