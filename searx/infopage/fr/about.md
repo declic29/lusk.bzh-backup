@@ -55,7 +55,7 @@ vous ne pouvez pas ajouter un moteur de recherche, veuillez :
 Lusk est une reprise logicielle du projet [searx] [Métamoteur],
 lui-même inspiré du [projet Seeks]. Il assure la confidentialité en
 mélangeant vos recherches vers d'autres plateformes sans stocker aucune
-données de recherche. SearXNG peut être ajouté à la barre de recherche
+données de recherche. Lusk peut être ajouté à la barre de recherche
 de votre navigateur et même être utilisé comme moteur de recherche par
 défaut.
 
