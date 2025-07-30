@@ -1,10 +1,10 @@
-# Informazioni su SearXNG
+# Informazioni su Lusk.bzh
 
-SearXNG è un [metamotore di ricerca] che aggrega i risultati di altri motori di
+Lusk è un [metamotore di ricerca] che aggrega i risultati di altri motori di
 ricerca.  {{link('motori di ricerca', 'preferences')}} e non memorizza
 informazioni sui suoi utenti.
 
-Il progetto SearXNG è guidato da una comunità aperta, unisciti a noi su Matrix
+Il progetto Lusk è guidato da una comunità aperta, unisciti a noi su Matrix
 se hai domande o vuoi semplicemente chiacchierare.  Se avete domande o volete
 semplicemente parlare di SearXNG a [#searxng:matrix.org].
 
@@ -18,20 +18,20 @@ Migliorate SearXNG.
 
 ## Perché usarlo?
 
-- SearXNG non offre risultati personalizzati come Google, ma non genera un
+- Lusk non offre risultati personalizzati come Google, ma non genera un
   profilo dell'utente.
-- SearXNG non si preoccupa di ciò che cercate, non condivide mai nulla con terze
+- Lusk non si preoccupa di ciò che cercate, non condivide mai nulla con terze
   parti e non può essere usato per compromettere l'utente.
 - SearXNG è un software libero, il codice è aperto al 100% e tutti sono invitati
   a migliorarlo.
 
 Se avete a cuore la privacy, se volete essere un utente consapevole o se credete
-nella libertà digitale, fate di SearXNG il vostro motore di ricerca predefinito
+nella libertà digitale, fate di Lusk il vostro motore di ricerca predefinito
 o eseguitelo sul vostro server!
 
 ## Come si imposta come motore di ricerca predefinito?
 
-SearXNG supporta [OpenSearch].  Per ulteriori informazioni sulla modifica del
+Lusk supporta [OpenSearch].  Per ulteriori informazioni sulla modifica del
 motore di ricerca motore di ricerca predefinito, consultare la documentazione
 del browser:
 
@@ -45,13 +45,13 @@ Quando si aggiunge un motore di ricerca, non devono esserci duplicati con lo
 stesso nome.  Se si verifica un problema per cui non si riesce ad aggiungere il
 motore di ricerca, è possibile:
 
-- rimuovere il duplicato (nome predefinito: SearXNG) o
+- rimuovere il duplicato (nome predefinito: Lusk) o
 - contattare il proprietario per assegnare all'istanza un nome diverso da quello
   predefinito.
 
 ## Come funziona?
 
-SearXNG è un fork del ben noto [searx] [metamotore di ricerca] che è stato
+Lusk è un fork del ben noto [searx] [metamotore di ricerca] che è stato
 ispirato dal [progetto Seeks].  Fornisce una privacy di base mescolando le
 ricerche su altre piattaforme senza memorizzare i dati di ricerca.  SearXNG può
 essere aggiunto alla barra di ricerca del browser; inoltre, può essere impostato
@@ -62,8 +62,8 @@ utilizzo dei motori utilizzati.
 
 ## Come posso renderlo mio?
 
-SearXNG apprezza la vostra preoccupazione per i log, quindi prendete il codice
-dal file [sorgenti di SearXNG] ed eseguitelo voi stessi!
+Lusk apprezza la vostra preoccupazione per i log, quindi prendete il codice
+dal file [sorgenti di Lusk] ed eseguitelo voi stessi!
 
 Aggiungete la vostra istanza a questo [elenco di istanze
 pubbliche]({{get_setting('brand.public_instances')}}) per aiutare altre persone
