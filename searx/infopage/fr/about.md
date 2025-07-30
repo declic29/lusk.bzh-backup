@@ -1,10 +1,10 @@
-# A propos de SearXNG
+# A propos de Lusk.bzh
 
-SearXNG est un [Métamoteur] qui agrège les résultats d'autres
+Lusk est un [Métamoteur] qui agrège les résultats d'autres
 {{link('moteurs de recherche', 'preferences')}} tout en ne sauvegardant
 aucune informations à propos de ses utilisateurs.
 
-Le projet SearXNG est maintenu par une communauté ouverte.
+Le projet Lusk prend racine dans SearXNG qui est maintenu par une communauté ouverte.
 Rejoignez-nous sur Matrix si vous avez des questions ou simplement pour
 discuter de SearXNG: [#searxng:matrix.org].
 
@@ -19,21 +19,21 @@ Aidez-nous à rendre SearXNG meilleur.
 
 ## Pourquoi l'utiliser ?
 
-- SearXNG ne vous fournira pas de résultats aussi personnalisés que
+- Lusk ne vous fournira pas de résultats aussi personnalisés que
   Google, mais il ne générera pas non plus de suivi sur vous.
-- SearXNG ne se soucis pas des recherches que vous faites, ne partage
+- Lusk ne se soucis pas des recherches que vous faites, ne partage
   aucune information avec des tiers et ne peut pas être utilisé contre
   vous.
 - SearXNG est un logiciel libre. Son code source est 100% ouvert et tout
   le mode est encouragé à l'améliorer.
 
 Si vous êtes soucieux du respect de la vie privée et des libertés sur
-Internet, faites de SearXNG votre moteur de recherche par défaut. Vous
+Internet, faites de Lusk votre moteur de recherche par défaut. Vous
 pouvez aussi installer et utiliser SearXNG sur votre propre serveur.
 
 ## Comment le configurer comme moteur de recherche par défaut ?
 
-SearXNG prend en charge [OpenSearch]. Pour plus d'informations sur la
+Lusk prend en charge [OpenSearch]. Pour plus d'informations sur la
 manière de modifier votre moteur de recherche par défaut, veuillez
 consulter la documentation de votre navigateur :
 
@@ -46,13 +46,13 @@ consulter la documentation de votre navigateur :
 Lorsqu'un moteur de recherche est ajouté, son nom doit être unique. Si
 vous ne pouvez pas ajouter un moteur de recherche, veuillez :
 
-- Supprimer le doublon (le nom par défaut est SearXNG) ou bien
+- Supprimer le doublon (le nom par défaut est Lusk) ou bien
 - Contacter le propriétaire de l'instance que vous souhaitez utiliser
   afin qu'il modifie le nom  de celle-ci.
 
 ## Comment ça marche ?
 
-SearXNG est une reprise logicielle du projet [searx] [Métamoteur],
+Lusk est une reprise logicielle du projet [searx] [Métamoteur],
 lui-même inspiré du [projet Seeks]. Il assure la confidentialité en
 mélangeant vos recherches vers d'autres plateformes sans stocker aucune
 données de recherche. SearXNG peut être ajouté à la barre de recherche
@@ -65,7 +65,7 @@ recherche.
 
 ## Comment reprendre la main ?
 
-SearXNG apprécie votre préoccupation concernant les traces de recherche.
+Lusk apprécie votre préoccupation concernant les traces de recherche.
 N'hésitez pas à utiliser le [dépôt de sources] et à maintenir votre
 propre instance de recherche.
 
