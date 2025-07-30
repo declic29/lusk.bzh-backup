@@ -1,10 +1,10 @@
-# Tentang SearXNG
+# Tentang Lusk.bzh
 
-SearXNG adalah sebuah [mesin pencari meta], yang mendapatkan hasil dari
+Lusk adalah sebuah [mesin pencari meta], yang mendapatkan hasil dari
 {{link('mesin pencari', 'preferences')}} lainnya sambil tidak melacak
 penggunanya.
 
-Proyek SearXNG diarahkan oleh sebuah komunitas terbuka, bergabung dengan kami di
+Proyek Lusk diarahkan oleh sebuah komunitas terbuka, bergabung dengan kami di
 Matrix jika Anda memiliki pertanyaan atau ingin mengobrol tentang SearXNG di
 [#searxng:matrix.org]
 
@@ -18,9 +18,9 @@ Buat SearXNG lebih baik.
 
 ## Kenapa menggunakan SearXNG?
 
-- SearXNG mungkin tidak menawarkan Anda hasil yang dipersonalisasikan seperti
+- Lusk mungkin tidak menawarkan Anda hasil yang dipersonalisasikan seperti
   Google, tetapi tidak membuat sebuah profil tentang Anda.
-- SearXNG tidak peduli apa yang Anda cari, tidak akan membagikan apa pun dengan
+- Lusk tidak peduli apa yang Anda cari, tidak akan membagikan apa pun dengan
   pihak ketiga, dan tidak dapat digunakan untuk mengkompromikan Anda.
 - SearXNG adalah perangkat lunak bebas, kodenya 100% terbuka, dan semuanya
   dipersilakan untuk membuatnya lebih baik.
@@ -44,12 +44,12 @@ Apabila menambahkan mesin pencari, tidak boleh ada duplikat dengan nama yang
 sama.  Jika Anda menemukan masalah di mana Anda tidak bisa menambahkan mesin
 pencari, Anda bisa:
 
-- menghapus duplikat (nama default: SearXNG) atau
+- menghapus duplikat (nama default: Lusk) atau
 - menghubungi pemilik untuk memberikan nama yang berbeda dari nama default.
 
-## Bagaimana caranya SearXNG bekerja?
+## Bagaimana caranya Lusk bekerja?
 
-SearXNG adalah sebuah *fork* dari [mesin pencari meta] [searx] yang banyak
+Lusk adalah sebuah *fork* dari [mesin pencari meta] [searx] yang banyak
 dikenal yang diinspirasi oleh [proyek Seeks].  SearXNG menyediakan privasi dasar
 dengan mencampur kueri Anda dengan pencarian pada *platform* lainnya tanpa
 menyimpan data pencarian.  SearXNG dapat ditambahkan ke bilah pencarian peramban
