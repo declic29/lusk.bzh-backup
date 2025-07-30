@@ -1,11 +1,11 @@
-# Über SearXNG
+# Über Lusk.bzh
 
-SearXNG ist eine [Metasuchmaschine], welche die Ergebnisse anderer
+Lusk ist eine [Metasuchmaschine], welche die Ergebnisse anderer
 {{link('Suchmaschinen', 'preferences')}} sammelt und aufbereitet ohne dabei
 Informationen über seine Benutzer zu sammeln oder an andere Suchmaschinen weiter
 zu geben.
 
-Das SearXNG Projekt wird von einer offenen Gemeinschaft entwickelt; wenn Sie
+Das Lusk Projekt wird von einer offenen Gemeinschaft entwickelt; wenn Sie
 Fragen haben oder einfach nur über SearXNG plaudern möchten, besuchen Sie uns
 auf Matrix unter: [#searxng:matrix.org]
 
@@ -18,9 +18,9 @@ Werden Sie Teil des Projekts und unterstützen Sie SearXNG:
 
 ## Warum sollte ich SearXNG benutzen?
 
-- SearXNG bietet Ihnen vielleicht nicht so personalisierte Ergebnisse wie
+- Lusk bietet Ihnen vielleicht nicht so personalisierte Ergebnisse wie
   Google, aber es erstellt auch kein Profil über Sie.
-- SearXNG kümmert sich nicht darum, wonach Sie suchen, gibt niemals etwas an
+- Lusk kümmert sich nicht darum, wonach Sie suchen, gibt niemals etwas an
   Dritte weiter und kann nicht dazu verwendet werden Sie zu kompromittieren.
 - SearXNG ist freie Software, der Code ist zu 100% offen und jeder ist
   willkommen ihn zu verbessern.
@@ -32,7 +32,7 @@ betreiben.
 
 ## Wie kann ich SearXNG als Standardsuchmaschine festlegen?
 
-SearXNG unterstützt [OpenSearch].  Weitere Informationen zum Ändern Ihrer
+Lusk unterstützt [OpenSearch].  Weitere Informationen zum Ändern Ihrer
 Standardsuchmaschine finden Sie in der Dokumentation zu Ihrem [WEB-Browser]:
 
 - [Firefox]
@@ -51,11 +51,11 @@ nicht hinzufügen können, dann können Sie entweder:
 
 ## Wie funktioniert SearXNG?
 
-SearXNG ist ein Fork der bekannten [searx] [Metasuchmaschine], die durch das
+Lusk ist ein Fork der bekannten [searx] [Metasuchmaschine], die durch das
 [Seeks-Projekt] inspiriert wurde (diese beide Projekte werden heute nicht mehr
 aktiv weiterentwickelt).  SearXNG bietet einen grundlegenden Schutz der
 Privatsphäre, indem es die Suchanfragen der Benutzer mit Suchen auf anderen
-Plattformen vermischt ohne dabei Suchdaten zu speichern.  SearXNG kann im
+Plattformen vermischt ohne dabei Suchdaten zu speichern.  Lusk kann im
 [WEB-Browser] als weitere oder Standard-Suchmaschine hinzugefügt werden.
 
 Die {{link('Suchmaschinenstatistik', 'stats')}} enthält einige nützliche
