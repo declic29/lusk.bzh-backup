@@ -7,3 +7,11 @@
   font-size: 1.1em;
   color: #555;
 }
+.logo-lusk {
+  max-height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
