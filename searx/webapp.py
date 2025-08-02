@@ -5,12 +5,15 @@
 import os
 import requests
 from flask import render_template, redirect, url_for
-from searx.webapp import app
+
 from searx.webadapter import get_selected_categories
 from searx.extended_types import sxng_request
 
-# Version correcte et unique de la route '/'
-@app.route('/', methods=['GET', 'POST'])
+# L'objet `app` est déjà défini plus loin dans le code. On déclare la route après sa définition.
+# Donc on n'ajoute pas de `from searx.webapp import app` (cela cause une erreur de type ImportError circulaire).
+
+# On déplacera cette route à la fin, après l'initialisation de `app`.
+# Voici uniquement le contenu de la fonction `index`, sans le décorateur.
 def index():
     # redirection si une recherche est faite
     if sxng_request.form.get('q'):
@@ -35,3 +38,6 @@ def index():
         current_locale=sxng_request.preferences.get_value("locale"),
         articles=articles
     )
+
+# À la toute fin du fichier, après avoir défini l'objet `app`, on ajoute :
+# app.add_url_rule('/', view_func=index, methods=['GET', 'POST'])
