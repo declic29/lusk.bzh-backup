@@ -1,0 +1,20 @@
+<div style="padding: 10px;">
+  <h3>📰 Actualités Bretagne</h3>
+  <ul style="list-style: none; padding: 0;">
+    {% for article in articles %}
+      <li style="margin-bottom: 12px;">
+        <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #333;">
+          <div style="display: flex; align-items: center;">
+            {% if article.image %}
+              <img src="{{ article.image }}" alt="" style="width: 80px; height: auto; margin-right: 10px; border-radius: 4px;">
+            {% endif %}
+            <div>
+              <strong>{{ article.title }}</strong><br>
+              <small>{{ article.publishedAt[:10] }}</small>
+            </div>
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
