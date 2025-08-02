@@ -1,1 +1,15 @@
+@app.route('/bretagne-news')
+def bretagne_news():
+    feed_url = 'https://www.letelegramme.fr/rss/region/bretagne.xml'
+    feed = feedparser.parse(feed_url)
+
+    page = int(request.args.get('page', 1))
+    per_page = 5
+    start = (page - 1) * per_page
+    end = start + per_page
+
+    entries = feed.entries[start:end]
+    total_pages = (len(feed.entries) + per_page - 1) // per_page
+
+    return render_template('bretagne_news.html', entries=entries, page=page, total_pages=total_pages)
 
