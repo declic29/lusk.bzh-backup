@@ -605,19 +605,21 @@ def rss_xsl():
 import requests
 from flask import render_template
 
-@app.route('/api/breizh-news')
-def breizh_news():
+@app.route('/')
+def index():
+    # Appel à GNews
     try:
-        url = "https://gnews.io/api/v4/search?q=bretagne&lang=fr&country=fr&max=5&apikey=2a28af6c4ebc58d5beba1fc150c105eb"
+        url = "https://gnews.io/api/v4/search?q=bretagne&lang=fr&country=fr&max=6&apikey=2a28af6c4ebc58d5beba1fc150c105eb"
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
         articles = data.get("articles", [])
     except Exception as e:
-        print(f"Erreur GNews : {e}")
+        print(f"[ACTUALITÉS BRETAGNE] Erreur : {e}")
         articles = []
 
-    return render_template("breizh_news.html", articles=articles)
+    return render_template('index.html', articles=articles)
+
 
 
 @app.route('/search', methods=['GET', 'POST'])
