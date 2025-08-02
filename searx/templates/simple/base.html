@@ -2,53 +2,111 @@
 <html class="no-js theme-{{ preferences.get_value('simple_style') or 'auto' }} center-alignment-{{ preferences.get_value('center_alignment') and 'yes' or 'no' }}" lang="{{ locale_rfc5646 }}" {% if rtl %} dir="rtl"{% endif %}>
 <head>
   <meta charset="UTF-8">
-<meta name="description" content="Lusk.bzh — Moteur de recherche breton éthique et respectueux de la vie privée">
-<meta name="keywords" content="lusk.bzh, moteur de recherche, Bretagne, éthique, vie privée, SearXNG, métamoteur, recherche anonyme">
-<meta name="generator" content="lusk.bzh (basé sur searxng/{{ searx_version }})">
-<meta name="referrer" content="no-referrer">
-<meta name="robots" content="noarchive">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="HandheldFriendly" content="True">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="description" content="Lusk.bzh — Moteur de recherche breton éthique et respectueux de la vie privée">
+  <meta name="keywords" content="lusk.bzh, moteur de recherche, Bretagne, éthique, vie privée, SearXNG, métamoteur, recherche anonyme">
+  <meta name="generator" content="lusk.bzh (basé sur searxng/{{ searx_version }})">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
   <title>Lusk.bzh — Ce que vous cherchez ne regarde que vous.</title>
   {% block meta %}{% endblock %}
   {% if rtl %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/searxng-rtl.min.css') }}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searxng-rtl.min.css') }}" type="text/css" media="screen">
   {% else %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/searxng.min.css') }}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/searxng.min.css') }}" type="text/css" media="screen">
   {% endif %}
   {% if get_setting('server.limiter') or get_setting('server.public_instance') %}
-  <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('client_token', token=link_token) }}" type="text/css">
   {% endif %}
+
   <!--[if gte IE 9]>-->
   <script src="{{ url_for('static', filename='js/searxng.head.min.js') }}" client_settings="{{ client_settings }}"></script>
   <!--<![endif]-->
+
   {% block head %}
-  <link title="{{ instance_name }}" type="application/opensearchdescription+xml" rel="search" href="{{ opensearch_url }}">
+    <link title="{{ instance_name }}" type="application/opensearchdescription+xml" rel="search" href="{{ opensearch_url }}">
   {% endblock %}
+
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}" sizes="any">
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+  <style>
+    .language-switcher {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
+
+    .language-switcher a {
+      position: relative;
+      display: inline-block;
+    }
+
+    .language-switcher img {
+      height: 24px;
+      border-radius: 50%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .language-switcher img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .language-switcher a::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -1.8em;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .language-switcher a:hover::after {
+      opacity: 1;
+    }
+  </style>
 </head>
-<body class="{{ endpoint }}_endpoint" >
+
+<body class="{{ endpoint }}_endpoint">
   <main id="main_{{  self._TemplateReference__context.name|replace("simple/", "")|replace(".html", "") }}" class="{{body_class}}">
+
     {% if errors %}
-        <div class="dialog-error" role="alert">
-            <a href="#" class="close" aria-label="close" title="close">×</a>
-            <ul>
-            {% for message in errors %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        </div>
+      <div class="dialog-error" role="alert">
+        <a href="#" class="close" aria-label="close" title="close">×</a>
+        <ul>
+        {% for message in errors %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      </div>
     {% endif %}
-<body class="{{ endpoint }}_endpoint" >
-  <div style="position:absolute; top:10px; left:10px; z-index:999;">
-    <a href="?language=br" title="Basculer en breton">
-      <img src="{{ url_for('static', filename='img/drapeau-bzh.png') }}" alt="Brezhoneg" style="height:24px;">
-    </a>
-  </div>
+
+    <!-- DRAPEAU BRETON -->
+    <div class="language-switcher">
+      {% if language == "br" %}
+        <a href="?language=fr" data-tooltip="Passer en français">
+          <img src="{{ url_for('static', filename='img/drapeau-fr.png') }}" alt="Français">
+        </a>
+      {% else %}
+        <a href="?language=br" data-tooltip="Basculer en breton">
+          <img src="{{ url_for('static', filename='img/drapeau-bzh.png') }}" alt="Brezhoneg">
+        </a>
+      {% endif %}
+    </div>
 
     <nav id="links_on_top">
       {%- from 'simple/icons.html' import icon_big -%}
@@ -64,20 +122,22 @@
         <a href="{{ url_for('preferences') }}" class="link_on_top_preferences">{{ icon_big('settings') }}<span>{{ _('Preferences') }}</span></a>
       {%- endblock -%}
     </nav>
-    {% block header %}
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
-  </main>
-  <footer>
-    <p>
-    <footer style="text-align:center; margin-top:2em; font-size:0.9em; color:#666;">
-  <p>
-    <img src="{{ url_for('static', filename='img/logo-footer.png') }}" alt="Logo Lusk.bzh" style="height:20px; vertical-align:middle; margin-right:8px;">
-    Propulsé par Lusk.bzh — un métamoteur ouvert et respectueux de la vie privée<br>
-    © OXY GEN 2025
-  </p>
-</footer>
 
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER PERSONNALISÉ -->
+  <footer style="text-align:center; margin-top:2em; font-size:0.9em; color:#666;">
+    <p>
+      <img src="{{ url_for('static', filename='img/logo-footer.png') }}" alt="Logo Lusk.bzh" style="height:20px; vertical-align:middle; margin-right:8px;">
+      Propulsé par Lusk.bzh — un métamoteur ouvert et respectueux de la vie privée<br>
+      © OXY GEN 2025
+    </p>
+  </footer>
+
+  <!--[if gte IE 9]>-->
+  <script src="{{ url_for('static', filename='js/searxng.min.js') }}"></script>
+  <!--<![endif]-->
 </body>
 </html>
