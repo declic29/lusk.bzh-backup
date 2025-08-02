@@ -43,6 +43,12 @@
             </ul>
         </div>
     {% endif %}
+<body class="{{ endpoint }}_endpoint" >
+  <div style="position:absolute; top:10px; left:10px; z-index:999;">
+    <a href="?language=br" title="Basculer en breton">
+      <img src="{{ url_for('static', filename='img/drapeau-bzh.png') }}" alt="Brezhoneg" style="height:24px;">
+    </a>
+  </div>
 
     <nav id="links_on_top">
       {%- from 'simple/icons.html' import icon_big -%}
