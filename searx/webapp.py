@@ -8,6 +8,8 @@ import json
 import os
 import sys
 import base64
+import feedparser
+from flask import render_template, request
 
 from timeit import default_timer
 from html import escape
