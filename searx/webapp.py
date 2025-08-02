@@ -30,6 +30,10 @@ from whitenoise import WhiteNoise
 from whitenoise.base import Headers
 
 import flask
+import requests
+from flask import render_template
+
+GNEWS_API_KEY = '2a28af6c4ebc58d5beba1fc150c105eb'  # Remplace par ta clé réelle
 
 from flask import (
     Flask,
@@ -601,7 +605,12 @@ def rss_xsl():
         f"{sxng_request.preferences.get_value('theme')}/rss.xsl",
         url_for=custom_url_for,
     )
-
+@app.route('/api/breizh-news')
+def breizh_news():
+    url = f"https://gnews.io/api/v4/search?q=bretagne&lang=fr&country=fr&max=5&apikey={GNEWS_API_KEY}"
+    resp = requests.get(url)
+    articles = resp.json().get('articles', [])
+    return render_template('breizh_news.html', articles=articles)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
