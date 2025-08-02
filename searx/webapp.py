@@ -813,6 +813,23 @@ def info(pagename, locale):
         active_pagename=pagename,
     )
 
+@app.route('/')
+def index():
+    # --- Appel à l’API GNews ---
+    import requests
+    GNEWS_API_KEY = os.environ.get("GNEWS_API_KEY")
+    url = f"https://gnews.io/api/v4/search?q=bretagne&lang=fr&country=fr&max=6&apikey={GNEWS_API_KEY}"
+    
+    try:
+        response = requests.get(url)
+        data = response.json()
+        articles = data.get("articles", [])
+    except Exception as e:
+        print(f"Erreur GNews : {e}")
+        articles = []
+
+    # --- Rendu de la page index avec les articles ---
+    return render_template("index.html", articles=articles)
 
 @app.route('/autocompleter', methods=['GET', 'POST'])
 def autocompleter():
