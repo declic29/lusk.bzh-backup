@@ -1,24 +1,20 @@
-<div style="padding: 10px;">
-  <h3>📰 Actualités Bretagne</h3>
+<div class="breizh-news-container">
+  <h3 class="breizh-news-title">📰 Actualités de Bretagne</h3>
+
   {% if articles %}
-    <ul style="list-style: none; padding: 0;">
-      {% for article in articles %}
-        <li style="margin-bottom: 12px;">
-          <a href="{{ article.url }}" target="_blank" style="text-decoration: none; color: #333;">
-            <div style="display: flex; align-items: center;">
-              {% if article.image %}
-                <img src="{{ article.image }}" alt="" style="width: 80px; height: auto; margin-right: 10px; border-radius: 4px;">
-              {% endif %}
-              <div>
-                <strong>{{ article.title }}</strong><br>
-                <small>{{ article.publishedAt[:10] }}</small>
-              </div>
-            </div>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
+  <div class="breizh-news-grid">
+    {% for article in articles %}
+    <a href="{{ article.url }}" target="_blank" class="breizh-news-card">
+      {% if article.image %}
+      <img src="{{ article.image }}" alt="Image actu" class="breizh-news-img">
+      {% endif %}
+      <div class="breizh-news-content">
+        <strong class="breizh-news-headline">{{ article.title }}</strong><br>
+        <small class="breizh-news-date">{{ article.publishedAt[:10] }}</small>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
   {% else %}
     <p>Aucune actualité trouvée.</p>
-  {% endif %}
-</div>
+  {% end
