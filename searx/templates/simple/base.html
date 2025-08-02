@@ -50,17 +50,7 @@
       </div>
     {% endif %}
 
-    <!-- DRAPEAU BRETON -->
-    <div class="language-switcher">
-      {% if language == "br" %}
-        <a href="?language=fr" data-tooltip="Passer en français">
-          <img src="{{ url_for('static', filename='img/drapeau-fr.png') }}" alt="Français">
-        </a>
-      {% else %}
-        <a href="?language=br" data-tooltip="Basculer en breton">
-          <img src="{{ url_for('static', filename='img/drapeau-bzh.png') }}" alt="Brezhoneg">
-        </a>
-      {% endif %}
+   
     </div>
 
     <nav id="links_on_top">
