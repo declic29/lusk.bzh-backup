@@ -34,51 +34,6 @@
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
 
-  <style>
-    .language-switcher {
-      position: absolute;
-      top: 10px;
-      left: 100px;
-      z-index: 999;
-    }
-
-    .language-switcher a {
-      position: relative;
-      display: inline-block;
-    }
-
-    .language-switcher img {
-      height: 24px;
-      border-radius: 50%;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .language-switcher img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .language-switcher a::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -1.8em;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.75);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .language-switcher a:hover::after {
-      opacity: 1;
-    }
-  </style>
 </head>
 
 <body class="{{ endpoint }}_endpoint">
