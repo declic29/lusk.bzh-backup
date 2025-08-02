@@ -41,3 +41,12 @@ def index():
 
 # À la toute fin du fichier, après avoir défini l'objet `app`, on ajoute :
 # app.add_url_rule('/', view_func=index, methods=['GET', 'POST'])
+# Initialisation de l’application SearXNG
+init()
+
+# Ajout manuel de la route principale vers la fonction index
+# (cela évite le décorateur @app.route('/') plus haut dans le fichier)
+app.add_url_rule('/', view_func=index, methods=['GET', 'POST'])
+
+# Entrée point WSGI si nécessaire
+application = app
