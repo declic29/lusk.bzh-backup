@@ -9,21 +9,5 @@
     <p class="subtitle">Ce que vous cherchez ne regarde que vous.</p>
   </div>
   {% include 'simple/simple_search.html' %}
-</div> 
-<section class="breizh-news-section">
-  <h2>📰 Actualités en Bretagne</h2>
-  <div class="news-grid">
-    {% for article in articles %}
-      <a href="{{ article.url }}" target="_blank" class="news-card">
-        {% if article.image %}
-          <img src="{{ article.image }}" alt="Illustration" class="news-img">
-        {% endif %}
-        <div class="news-content">
-          <strong class="news-title">{{ article.title }}</strong><br>
-          <small class="news-date">{{ article.publishedAt[:10] }}</small>
-        </div>
-      </a>
-    {% endfor %}
-  </div>
-</section>
+</div>
 {% endblock %}
