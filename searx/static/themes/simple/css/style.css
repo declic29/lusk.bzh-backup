@@ -1,0 +1,55 @@
+.breizh-news-section {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 10px;
+}
+
+.breizh-news-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #003366;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+.news-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 10px 12px;
+}
+
+.news-title {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.news-date {
+  font-size: 0.8rem;
+  color: #666;
+}
