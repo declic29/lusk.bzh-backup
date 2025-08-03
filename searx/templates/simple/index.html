@@ -37,7 +37,7 @@ function fetchNews(apiKey) {
         </div>
     `;
 
-    fetch(`https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=6`)
+    fetch(`https://gnews.io/api/v4/search?q=Bretagne&token=${apiKey}&lang=fr&max=6`)
         .then(response => response.json())
         .then(data => {
             container.innerHTML = data.articles?.length > 0 
