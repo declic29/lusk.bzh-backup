@@ -86,5 +86,11 @@
   <!--[if gte IE 9]>-->
   <script src="{{ url_for('static', filename='js/searxng.min.js') }}"></script>
   <!--<![endif]-->
+  <!--[if gte IE 9]>-->
+  <script src="{{ url_for('static', filename='js/searxng.min.js') }}"></script>
+  <!--<![endif]-->
+  
+  {% block extra_js %}{% endblock %}
+</body>
 </body>
 </html>
