@@ -11,10 +11,10 @@
   </div>
   {% include 'simple/simple_search.html' %}
   
-  <!-- Module d'actualités amélioré -->
-  <div id="news-container" class="container" style="margin-top: 30px; max-width: 800px;">
-    <h2 style="text-align: center; margin-bottom: 20px;">Actualités</h2>
-    <div id="news-results" class="row" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
+  <!-- Module d'actualités avec vignettes carrées -->
+  <div id="news-container" style="margin: 30px auto; max-width: 900px;">
+    <h2 style="text-align: center; margin-bottom: 25px; font-size: 1.5rem;">Actualités</h2>
+    <div id="news-results" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 0 15px;"></div>
   </div>
 </div>
 {% endblock %}
@@ -23,66 +23,137 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const apiKey = '2a28af6c4ebc58d5beba1fc150c105eb';
-    
-    if (apiKey) {
-        fetchNews(apiKey);
-    }
+    if (apiKey) fetchNews(apiKey);
 });
 
 function fetchNews(apiKey) {
-    const url = `https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=4`;
     const container = document.getElementById('news-results');
-    
     if (!container) return;
     
-    container.innerHTML = '<div class="text-center" style="width:100%"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i><p>Chargement des actualités...</p></div>';
-    
-    fetch(url)
+    container.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center;">
+            <div class="news-loader"></div>
+            <p>Chargement des actualités...</p>
+        </div>
+    `;
+
+    fetch(`https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=6`)
         .then(response => response.json())
         .then(data => {
-            if (data.articles?.length > 0) {
-                container.innerHTML = data.articles.map(article => `
-                    <div class="news-item" style="width: 45%; max-width: 300px; margin: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
-                        <div style="padding: 12px;">
+            container.innerHTML = data.articles?.length > 0 
+                ? data.articles.map(article => `
+                    <a href="${article.url}" target="_blank" rel="noopener" class="news-card">
+                        <div class="news-image-container">
                             ${article.image ? `
-                            <div style="height: 120px; overflow: hidden; display: flex; align-items: center; margin-bottom: 10px;">
-                                <img src="${article.image}" 
-                                     alt="${article.title}" 
-                                     style="width: 100%; height: auto; object-fit: cover;"
-                                     loading="lazy">
-                            </div>` : ''}
-                            <h4 style="font-size: 1em; margin: 0 0 8px 0; line-height: 1.3;">
-                                <a href="${article.url}" target="_blank" rel="noopener" style="color: #333; text-decoration: none;">${article.title}</a>
-                            </h4>
-                            <p style="font-size: 0.85em; color: #555; margin-bottom: 8px;">${article.description?.substring(0, 100) || ''}...</p>
-                            <small style="color: #888; font-size: 0.75em;">
-                                ${new Date(article.publishedAt).toLocaleDateString('fr-FR')}
-                            </small>
+                            <img src="${article.image}" 
+                                 alt="${article.title}" 
+                                 class="news-image"
+                                 loading="lazy">` 
+                            : '<div class="news-image-placeholder"></div>'}
                         </div>
-                    </div>
-                `).join('');
-            } else {
-                container.innerHTML = '<p class="text-center" style="width:100%">Aucune actualité disponible</p>';
-            }
+                        <div class="news-content">
+                            <h3>${article.title}</h3>
+                            <p>${article.description?.substring(0, 80) || ''}...</p>
+                            <time>${new Date(article.publishedAt).toLocaleDateString('fr-FR')}</time>
+                        </div>
+                    </a>
+                `).join('') 
+                : '<p style="grid-column:1/-1; text-align:center">Aucune actualité disponible</p>';
         })
-        .catch(error => {
-            console.error('Error:', error);
-            container.innerHTML = '<p class="text-center" style="width:100%">Impossible de charger les actualités</p>';
+        .catch(() => {
+            container.innerHTML = '<p style="grid-column:1/-1; text-align:center">Service indisponible</p>';
         });
 }
 </script>
 
 <style>
-.news-item:hover {
-    transform: translateY(-3px);
-    transition: transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+/* Styles des vignettes carrées */
+.news-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    background: white;
 }
 
-@media (max-width: 768px) {
-    .news-item {
-        width: 100% !important;
-        max-width: none !important;
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.news-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Ratio carré 1:1 */
+    overflow: hidden;
+}
+
+.news-image, .news-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-image-placeholder {
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-content {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.news-content p {
+    margin: 0 0 8px 0;
+    font-size: 0.8rem;
+    color: #555;
+    flex-grow: 1;
+}
+
+.news-content time {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.news-loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #news-results {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
     }
 }
 </style>
