@@ -12,39 +12,44 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const apiKey = '{{ env.GNEWS_API_KEY }}'; // Utilisez une variable d'environnement
-    const url = `https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=4`;
+    // Configuration simple sans variable d'environnement pour tester
+    const apiKey = 'YOUR_API_KEY_HERE'; // Remplacez temporairement par votre clé
     
+    fetchNews(apiKey);
+});
+
+function fetchNews(apiKey) {
+    const url = `https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=4`;
     const container = document.getElementById('news-results');
+    
     if (!container) return;
     
-    container.innerHTML = '<div class="text-center">Chargement des actualités...</div>';
+    container.innerHTML = '<div class="text-center">Chargement...</div>';
     
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Erreur réseau');
+            return response.json();
+        })
         .then(data => {
-            if (data.articles && data.articles.length > 0) {
-                let html = '';
-                data.articles.forEach(article => {
-                    html += `
+            if (data.articles?.length > 0) {
+                container.innerHTML = data.articles.map(article => `
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="news-card">
-                            <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
-                            ${article.image ? `<img src="${article.image}" alt="${article.title}">` : ''}
+                            <h3><a href="${article.url}" target="_blank" rel="noopener">${article.title}</a></h3>
+                            ${article.image ? `<img src="${article.image}" alt="${article.title}" loading="lazy">` : ''}
                             <p>${article.description || ''}</p>
                         </div>
                     </div>
-                    `;
-                });
-                container.innerHTML = html;
+                `).join('');
             } else {
                 container.innerHTML = '<p class="text-center">Aucune actualité disponible</p>';
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            container.innerHTML = '<p class="text-center">Impossible de charger les actualités</p>';
+            container.innerHTML = '<p class="text-center">Service temporairement indisponible</p>';
         });
-});
+}
 </script>
 {% endblock %}
