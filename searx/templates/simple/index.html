@@ -11,3 +11,53 @@
   {% include 'simple/simple_search.html' %}
 </div>
 {% endblock %}
+<!-- AJOUTER le module d'actualités SOUS la recherche -->
+<div id="news-container" class="container" style="margin-top: 30px; max-width: 800px;">
+    <h2 style="text-align: center;">Actualités</h2>
+    <div id="news-results" class="row"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Version temporaire avec clé en dur - À remplacer par la méthode sécurisée plus tard
+    const apiKey = 'VOTRE_CLE_API_ICI';
+    
+    if (apiKey && apiKey !== '2a28af6c4ebc58d5beba1fc150c105eb') {
+        fetchNews(apiKey);
+    }
+});
+
+function fetchNews(apiKey) {
+    const url = `https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&country=fr&max=4`;
+    const container = document.getElementById('news-results');
+    
+    if (!container) return;
+    
+    container.innerHTML = '<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Chargement des actualités...</div>';
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.articles?.length > 0) {
+                container.innerHTML = data.articles.map(article => `
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-4">
+                        <div class="news-card" style="padding: 10px; margin: 5px; border: 1px solid #eee; border-radius: 5px;">
+                            <h4 style="font-size: 1.1em; margin-top: 0;"><a href="${article.url}" target="_blank" rel="noopener">${article.title}</a></h4>
+                            ${article.image ? `<img src="${article.image}" alt="${article.title}" style="max-width: 100%; height: auto; margin-bottom: 8px;" loading="lazy">` : ''}
+                            <p style="font-size: 0.9em;">${article.description || ''}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = '<p class="text-center">Aucune actualité disponible</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            container.innerHTML = '<p class="text-center">Impossible de charger les actualités</p>';
+        });
+}
+</script>
+{% endblock %}
