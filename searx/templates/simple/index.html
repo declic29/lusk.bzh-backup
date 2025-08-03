@@ -23,99 +23,146 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const apiKey = '2a28af6c4ebc58d5beba1fc150c105eb';
-    if (apiKey) {
-        console.log("Initialisation du module d'actualités...");
-        fetchBretonNews(apiKey);
-    }
+    if (apiKey) fetchBretonNews(apiKey);
 });
 
-async function fetchBretonNews(apiKey) {
+function fetchBretonNews(apiKey) {
     const container = document.getElementById('news-results');
-    if (!container) {
-        console.error("ERREUR: Élément #news-results introuvable");
-        return;
-    }
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center;">
+            <div class="news-loader"></div>
+            <p>Chargement des actualités bretonnes...</p>
+        </div>
+    `;
 
-    try {
-        container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center;">
-                <div class="news-loader"></div>
-                <p>Recherche des dernières actualités bretonnes...</p>
-            </div>
-        `;
+    const query = encodeURIComponent("Bretagne OR Breton OR Rennes OR Brest OR Quimper OR Vannes OR Saint-Brieuc OR Lorient OR Morbihan OR Finistère OR Côtes-d'Armor OR Ille-et-Vilaine");
+    
+    fetch(`https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.articles?.length > 0) {
+                const bretonArticles = data.articles.filter(article => 
+                    article.title && /Bretagne|Breton|Rennes|Brest|Quimper|Vannes|Saint-Brieuc|Lorient|Morbihan|Finistère|Côtes-d'Armor|Ille-et-Vilaine/i.test(article.title)
+                );
+                
+                container.innerHTML = bretonArticles.length > 0
+                    ? bretonArticles.slice(0, 6).map(article => `
+                        <a href="${article.url}" target="_blank" rel="noopener" class="news-card">
+                            <div class="news-image-container">
+                                ${article.image ? `
+                                <img src="${article.image}" 
+                                     alt="${article.title}" 
+                                     class="news-image"
+                                     loading="lazy">` 
+                                : '<div class="news-image-placeholder"></div>'}
+                            </div>
+                            <div class="news-content">
+                                <h3>${highlightBretonTerms(article.title)}</h3>
+                                <p>${highlightBretonTerms(article.description?.substring(0, 80) || '')}...</p>
+                                <time>${new Date(article.publishedAt).toLocaleDateString('fr-FR')}</time>
+                            </div>
+                        </a>
+                    `).join('')
+                    : '<p style="grid-column:1/-1; text-align:center">Aucune actualité bretonne trouvée</p>';
+            } else {
+                container.innerHTML = '<p style="grid-column:1/-1; text-align:center">Aucune actualité disponible</p>';
+            }
+        })
+        .catch(() => {
+            container.innerHTML = '<p style="grid-column:1/-1; text-align:center">Service indisponible</p>';
+        });
+}
 
-        const query = encodeURIComponent("Bretagne OR (Rennes AND actualité) OR Finistère OR Morbihan");
-        const response = await fetch(`https://gnews.io/api/v4/top-headlines?token=${apiKey}&lang=fr&q=${query}`);
-        
-        console.debug("Réponse API:", response);
-
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Données reçues:", data);
-
-        if (!data.articles || data.articles.length === 0) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 20px;">
-                    <p>Aucune actualité bretonne trouvée aujourd'hui.</p>
-                    <small>Essayez de rafraîchir la page ou revenez plus tard.</small>
-                </div>
-            `;
-            return;
-        }
-
-        const bretonArticles = data.articles.filter(article => 
-            article.title && /Bretagne|Breton|Rennes|Brest|Quimper|Vannes|Saint-Brieuc|Lorient|Morbihan|Finistère|Côtes-d'Armor|Ille-et-Vilaine/i.test(article.title)
-        );
-
-        if (bretonArticles.length === 0) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center;">
-                    <p>Nous n'avons pas trouvé d'actualités locales.</p>
-                    <button onclick="fetchBretonNews('${apiKey}')" 
-                            style="margin-top: 10px; padding: 5px 10px; background: #1e6f8c; color: white; border: none; border-radius: 4px;">
-                        Réessayer
-                    </button>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = bretonArticles.slice(0, 6).map(article => `
-            <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="news-card">
-                <div class="news-image-container">
-                    ${article.image ? `<img src="${article.image}" alt="${article.title}" loading="lazy">` : ''}
-                </div>
-                <div class="news-content">
-                    <h3>${article.title}</h3>
-                    <p>${article.description?.substring(0, 100) || 'Lire la suite...'}</p>
-                    <small>${new Date(article.publishedAt).toLocaleDateString('fr-FR')}</small>
-                </div>
-            </a>
-        `).join('');
-
-    } catch (error) {
-        console.error("Échec du chargement des actualités:", error);
-        container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; color: #d32f2f;">
-                <p>Service temporairement indisponible</p>
-                <small>${error.message}</small>
-                <button onclick="fetchBretonNews('${apiKey}')" 
-                        style="margin-top: 10px; padding: 5px 10px; background: #1e6f8c; color: white; border: none; border-radius: 4px;">
-                    Réessayer
-                </button>
-            </div>
-        `;
-    }
+function highlightBretonTerms(text) {
+    if (!text) return '';
+    return text.replace(/(Bretagne|Breton|Rennes|Brest|Quimper|Vannes|Saint-Brieuc|Lorient|Morbihan|Finistère|Côtes-d'Armor|Ille-et-Vilaine)/gi, 
+        '<span style="color: #1e6f8c; font-weight:600">$1</span>');
 }
 </script>
 
 <style>
+/* Styles essentiels pour les tuiles */
+#news-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border: 1px solid #d4e6f1;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-color: #1e6f8c;
+}
+
+.news-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Ratio carré 1:1 */
+    overflow: hidden;
+}
+
+.news-image, .news-image-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-image-placeholder {
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-content {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #1a4a5a;
+}
+
+.news-content p {
+    margin: 0 0 8px 0;
+    font-size: 0.8rem;
+    color: #555;
+    flex-grow: 1;
+}
+
+.news-content time {
+    font-size: 0.75rem;
+    color: #888;
+}
+
 .news-loader {
     border: 3px solid #f3f3f3;
-    border-top: 3px solid #1e6f8c;
+    border-top: 3px solid #3498db;
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -126,6 +173,14 @@ async function fetchBretonNews(apiKey) {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #news-results {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
 }
 </style>
 {% endblock %}
