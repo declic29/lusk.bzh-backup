@@ -1,25 +1,24 @@
-/* Styles pour le module d'actualités */
+/* News module responsive */
+#news-container {
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
 .news-card {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    background: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: #fff;
+    transition: transform 0.2s;
 }
 
-.news-card h3 {
-    margin-top: 0;
-    font-size: 1.2em;
-}
-
-.news-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 3px;
+.news-card:hover {
+    transform: translateY(-3px);
 }
 
 @media (max-width: 768px) {
     .news-card {
         margin-bottom: 15px;
+    }
+    
+    #news-results .col-sm-6 {
+        width: 100%;
     }
 }
