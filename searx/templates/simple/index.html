@@ -1,8 +1,29 @@
 {% extends "simple/base.html" %}
 
 {% block content %}
-<!-- Votre contenu existant de la page d'accueil -->
+<!-- Contenu ORIGINAL de SearX - NE PAS SUPPRIMER -->
+<div id="main_content" class="container">
+  {% if autocomplete %}
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+      <form method="{{ method or 'POST' }}" action="{{ url_for('search') }}" id="search_form" role="search">
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="input-group search-bar">
+              <input type="text" class="form-control" id="q" name="q" placeholder="{{ _('Search for...') }}" autocomplete="off" spellcheck="false" dir="auto" value="{{ q or '' }}">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="hide_if_nojs">{{ icon('search') }}</span><span class="hidden active_if_nojs">{{ _('Start search') }}</span></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+</div>
 
+<!-- AJOUTER le module d'actualités SOUS la recherche -->
 <div id="news-container" class="container" style="margin-top: 30px; max-width: 800px;">
     <h2 style="text-align: center;">Actualités</h2>
     <div id="news-results" class="row"></div>
@@ -12,10 +33,12 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Configuration simple sans variable d'environnement pour tester
-    const apiKey = '2a28af6c4ebc58d5beba1fc150c105eb'; // Remplacez temporairement par votre clé
+    // Version temporaire avec clé en dur - À remplacer par la méthode sécurisée plus tard
+    const apiKey = 'VOTRE_CLE_API_ICI';
     
-    fetchNews(apiKey);
+    if (apiKey && apiKey !== 'VOTRE_CLE_API_ICI') {
+        fetchNews(apiKey);
+    }
 });
 
 function fetchNews(apiKey) {
@@ -24,21 +47,18 @@ function fetchNews(apiKey) {
     
     if (!container) return;
     
-    container.innerHTML = '<div class="text-center">Chargement...</div>';
+    container.innerHTML = '<div class="text-center"><i class="fa fa-spinner fa-spin"></i> Chargement des actualités...</div>';
     
     fetch(url)
-        .then(response => {
-            if (!response.ok) throw new Error('Erreur réseau');
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.articles?.length > 0) {
                 container.innerHTML = data.articles.map(article => `
-                    <div class="col-md-6 col-lg-3 mb-4">
-                        <div class="news-card">
-                            <h3><a href="${article.url}" target="_blank" rel="noopener">${article.title}</a></h3>
-                            ${article.image ? `<img src="${article.image}" alt="${article.title}" loading="lazy">` : ''}
-                            <p>${article.description || ''}</p>
+                    <div class="col-xs-12 col-sm-6 col-md-3 mb-4">
+                        <div class="news-card" style="padding: 10px; margin: 5px; border: 1px solid #eee; border-radius: 5px;">
+                            <h4 style="font-size: 1.1em; margin-top: 0;"><a href="${article.url}" target="_blank" rel="noopener">${article.title}</a></h4>
+                            ${article.image ? `<img src="${article.image}" alt="${article.title}" style="max-width: 100%; height: auto; margin-bottom: 8px;" loading="lazy">` : ''}
+                            <p style="font-size: 0.9em;">${article.description || ''}</p>
                         </div>
                     </div>
                 `).join('');
@@ -48,7 +68,7 @@ function fetchNews(apiKey) {
         })
         .catch(error => {
             console.error('Error:', error);
-            container.innerHTML = '<p class="text-center">Service temporairement indisponible</p>';
+            container.innerHTML = '<p class="text-center">Impossible de charger les actualités</p>';
         });
 }
 </script>
