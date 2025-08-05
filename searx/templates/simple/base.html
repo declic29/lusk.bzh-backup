@@ -63,6 +63,19 @@
     {% block content %}
     {% endblock %}
   </main>
+
+    {% if self._TemplateReference__context.name == 'simple/search.html' %}
+    <div class="map-icon-container" style="text-align: center; margin: 20px 0;">
+        <a href="https://www.openstreetmap.org/#map=8/52.154/5.295" title="OpenStreetMap">
+            <img src="{{ url_for('static', filename='img/osm_logo.png') }}" 
+                 alt="OpenStreetMap" 
+                 style="width: 40px; height: 40px; opacity: 0.8; transition: opacity 0.3s;"
+                 onmouseover="this.style.opacity=1" 
+                 onmouseout="this.style.opacity=0.8">
+        </a>
+    </div>
+    {% endif %}
+
   <footer>
   <p style="text-align:center; font-size: 0.9rem; color: #666; line-height: 1.5;">
     Propulsé par Lusk - 2025.8.3+1e3d818 — Le métamoteur breton & respectueux de la vie privée<br>
